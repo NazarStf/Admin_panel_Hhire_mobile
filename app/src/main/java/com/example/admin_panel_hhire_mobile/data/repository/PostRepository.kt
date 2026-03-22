@@ -20,12 +20,12 @@ object PostRepository {
 
     // ---------- MOCK POSTS ----------
     private val posts = arrayListOf(
-        Post(1, 1, "Ремонт пральної машини", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("ремонт", "техніка")),
-        Post(2, 2, "Потрібен електрик", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("електрика")),
-        Post(3, 3, "Заміна труб", System.currentTimeMillis(), PostStatus.BLOCKED, tags = listOf("сантехніка")),
-        Post(4, 4, "Дизайн квартири", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("дизайн")),
-        Post(5, 5, "Ремонт даху", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("будівництво")),
-        Post(6, 6, "Ремонт авто", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("авто"))
+        Post(1, 1, "TITLE1","Ремонт пральної машини", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("ремонт", "техніка")),
+        Post(3,  2, "TITLE2", "Потрібен електрик", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("електрика")),
+        Post(3, 3, "3","Заміна труб", System.currentTimeMillis(), PostStatus.BLOCKED, tags = listOf("сантехніка")),
+        Post(4, 4,"4", "Дизайн квартири", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("дизайн")),
+        Post(5, 5, "TITLE5","Ремонт даху", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("будівництво")),
+        Post(6, 6,"TITLE6", "Ремонт авто", System.currentTimeMillis(), PostStatus.ACTIVE, tags = listOf("авто"))
     )
 
     // ---------- GET LISTS ----------
