@@ -45,6 +45,12 @@ class PostAdapter(
             holder.binding.chipGroupTags.addView(chip)
         }
         holder.itemView.setOnClickListener { onClick(post) }
+
+        holder.binding.btnBlock.setOnClickListener {
+        }
+
+        holder.binding.btnMark.setOnClickListener {
+        }
     }
 
     override fun getItemCount(): Int = posts.size
