@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_posts"
+        android:icon="@drawable/logo"
+        android:title="Пости"/>
+    <item
+        android:id="@+id/nav_users"
+        android:icon="@drawable/logo"
+        android:title="Користувачі"/>
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/logo"
+        android:title="Налаштування"/>
+</menu>
