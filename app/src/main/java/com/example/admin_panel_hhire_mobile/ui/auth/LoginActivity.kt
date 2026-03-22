@@ -30,6 +30,11 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            if (login == "admin" && password == "admin") {
+
+            } else {
+                Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
