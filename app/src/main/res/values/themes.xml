@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.Admin_panel_Hhire_mobile" parent="Base.Theme.Admin_panel_Hhire_mobile" />
+    <style name="NoIndicatorBottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@null</item>
+    </style>
 </resources>
