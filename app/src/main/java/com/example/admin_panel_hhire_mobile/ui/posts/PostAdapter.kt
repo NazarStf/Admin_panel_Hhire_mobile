@@ -7,10 +7,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.admin_panel_hhire_mobile.databinding.ItemPostBinding
-import com.example.admin_panel_hhire_mobile.R
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import com.google.android.flexbox.FlexboxLayout
 
 class PostAdapter(
     private val posts: List<Post>,
@@ -27,36 +23,14 @@ class PostAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
 
-        holder.binding.tvPostDescription.text = post.content
-        holder.binding.tvPostStatus.text = post.status.name
         holder.binding.tvPostTitle.text = post.title
-
+        holder.binding.tvPostStatus.text = post.status.name
+        holder.binding.tvPostDescription.text = post.content
         holder.binding.tvPostStatus.setTextColor(
-            if (post.status == PostStatus.ACTIVE)
-                Color.parseColor("#388E3C")
-            else
-                Color.parseColor("#D32F2F")
+            if (post.status == PostStatus.ACTIVE) Color.parseColor("#388E3C")
+            else Color.parseColor("#D32F2F")
         )
-
-        holder.binding.flexboxTags.removeAllViews()
-        post.tags.forEach { tag ->
-            val tagView = TextView(holder.itemView.context).apply {
-                text = tag
-                setTextColor(Color.BLACK)
-                textSize = 12f
-                setPadding(24, 8, 24, 8) // відступи всередині овалу
-                background = ContextCompat.getDrawable(context, R.drawable.tag_background)
-            }
-            val layoutParams = FlexboxLayout.LayoutParams(
-                FlexboxLayout.LayoutParams.WRAP_CONTENT,
-                FlexboxLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                setMargins(8, 4, 8, 4) // відстань між тегами
-            }
-            tagView.layoutParams = layoutParams
-            holder.binding.flexboxTags.addView(tagView)
-        }
-
+        holder.binding.tvPostTags.text = post.tags.joinToString(" ") { "#$it" }
         holder.itemView.setOnClickListener { onClick(post) }
     }
 
