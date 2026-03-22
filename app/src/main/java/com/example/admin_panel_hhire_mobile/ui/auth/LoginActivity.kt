@@ -21,5 +21,9 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        binding.btnLogin.setOnClickListener {
+            val login = binding.etLogin.text.toString()
+            val password = binding.etPassword.text.toString()
+        }
     }
 }
