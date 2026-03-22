@@ -8,6 +8,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.admin_panel_hhire_mobile.R
 import com.example.admin_panel_hhire_mobile.databinding.ActivityLoginBinding
 import android.widget.Toast
+import com.example.admin_panel_hhire_mobile.MainActivity
+import android.content.Intent
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -31,7 +33,9 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (login == "admin" && password == "admin") {
-
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             } else {
                 Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
             }
