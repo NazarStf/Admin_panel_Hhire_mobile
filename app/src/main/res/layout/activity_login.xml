@@ -22,7 +22,7 @@
         android:id="@+id/etLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="Login"
         android:inputType="text"/>
 
     <EditText
