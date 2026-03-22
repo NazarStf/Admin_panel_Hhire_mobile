@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.admin_panel_hhire_mobile.R
 import com.example.admin_panel_hhire_mobile.databinding.ActivityLoginBinding
+import android.widget.Toast
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -24,6 +25,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val login = binding.etLogin.text.toString()
             val password = binding.etPassword.text.toString()
+
+            if (login.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
         }
     }
 }
