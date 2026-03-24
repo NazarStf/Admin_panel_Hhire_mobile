@@ -76,13 +76,15 @@
             android:id="@+id/btnBlock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/gray"
+            android:textColor="@color/black"
             android:text="Block"
-            android:textSize="12sp"/>
+            android:textSize="20sp"/>
 
         <ImageButton
             android:id="@+id/btnMark"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/bookmark"
             android:background="?attr/selectableItemBackgroundBorderless"
