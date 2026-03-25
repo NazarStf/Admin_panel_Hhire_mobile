@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.admin_panel_hhire_mobile.R
 import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
+import com.example.admin_panel_hhire_mobile.databinding.FragmentPostDetailsBinding
 
 class PostDetailsFragment : Fragment() {
+    private var _binding: FragmentPostDetailsBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -27,5 +30,17 @@ class PostDetailsFragment : Fragment() {
 
         val postId = arguments?.getInt("postId") ?: return
         val post = PostRepository.getPostById(postId)
+        binding.tvTitle.text = post.title
+        binding.tvContent.text = post.content
+        binding.tvStatus.text = post.status.name
+        binding.tvCreated.text = "Created: ${post.createdDate}"
+        binding.tvEdited.text = "Edited: ${post.editDate}"
+
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 }
