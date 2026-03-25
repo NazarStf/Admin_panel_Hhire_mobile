@@ -31,11 +31,15 @@ class PostDetailsFragment : Fragment() {
 
         val postId = arguments?.getInt("postId") ?: return
         val post = PostRepository.getPostById(postId) ?: return
+        val user = PostRepository.getUserById(post.authorId)
         binding.tvTitle.text = post.title
         binding.tvContent.text = post.content
         binding.tvStatus.text = post.status.name
         binding.tvCreated.text = "Created: ${post.createdDate}"
         binding.tvEdited.text = "Edited: ${post.editDate}"
+        binding.tvAuthorName.text = user?.name ?: "Unknown"
+        binding.tvAuthorId.text = "Author ID: ${post.authorId}"
+
 
     }
     override fun onDestroyView() {
