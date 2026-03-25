@@ -23,13 +23,14 @@ class PostDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_post_details, container, false)
+        _binding = FragmentPostDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val postId = arguments?.getInt("postId") ?: return
-        val post = PostRepository.getPostById(postId)
+        val post = PostRepository.getPostById(postId) ?: return
         binding.tvTitle.text = post.title
         binding.tvContent.text = post.content
         binding.tvStatus.text = post.status.name
