@@ -48,9 +48,13 @@ class PostDetailsFragment : Fragment() {
 
         post.tags.forEach { tag ->
             val chip = Chip(requireContext()).apply {
+                chipCornerRadius = 50f
                 text = tag
                 isClickable = false
                 isCheckable = false
+                chipBackgroundColor = ColorStateList.valueOf(Color.LTGRAY)
+                chipStrokeColor = ColorStateList.valueOf(Color.LTGRAY)
+                setTextColor(Color.BLACK)
             }
             binding.chipGroupTags.addView(chip)
         }
@@ -74,19 +78,15 @@ class PostDetailsFragment : Fragment() {
 
     }
     private fun setStatusBackground(status: PostStatus) {
+        val green = requireContext().getColor(R.color.green)
+        val red = requireContext().getColor(R.color.red)
+        val yellow = requireContext().getColor(R.color.yellow)
         val bgDrawable = android.graphics.drawable.GradientDrawable().apply {
-            cornerRadius = 12f
-            setStroke(2, when(status) {
-                PostStatus.ACTIVE -> Color.GREEN
-                PostStatus.BLOCKED -> Color.RED
-                PostStatus.MARKED -> Color.YELLOW
-                PostStatus.FROZEN -> Color.LTGRAY
-            })
+            cornerRadius = 360f
             setColor(when(status) {
-                PostStatus.ACTIVE -> Color.WHITE
-                PostStatus.BLOCKED -> Color.RED
-                PostStatus.MARKED -> Color.YELLOW
-                PostStatus.FROZEN -> Color.LTGRAY
+                PostStatus.ACTIVE -> green
+                PostStatus.BLOCKED -> red
+                PostStatus.MARKED -> yellow
             })
         }
         binding.tvStatus.background = bgDrawable

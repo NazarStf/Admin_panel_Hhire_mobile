@@ -41,6 +41,7 @@ class PostAdapter(
                 isCheckable = false
                 chipBackgroundColor = ColorStateList.valueOf(Color.LTGRAY)
                 chipStrokeColor = ColorStateList.valueOf(Color.LTGRAY)
+                chipCornerRadius = 50f
                 setTextColor(Color.BLACK)
             }
             holder.binding.chipGroupTags.addView(chip)
