@@ -53,15 +53,22 @@ class PostDetailsFragment : Fragment() {
             }
             binding.chipGroupTags.addView(chip)
         }
-        if (imageName != null) {
+        if (imageName == null) {
+            binding.imgPost.visibility = View.GONE
+        }else {
             val resId = requireContext().resources.getIdentifier(
                 imageName,
                 "drawable",
                 requireContext().packageName
             )
             binding.imgPost.setImageResource(resId)
-        } else {
-            binding.imgPost.setImageResource(R.drawable.ic_image_placeholder)
+            if (resId != 0) {
+                binding.imgPost.setImageResource(resId)
+                binding.imgPost.visibility = View.VISIBLE
+            }else {
+                binding.imgPost.setImageResource(R.drawable.ic_image_placeholder)
+                binding.imgPost.visibility = View.VISIBLE
+            }
         }
 
     }
