@@ -20,12 +20,12 @@ object PostRepository {
 
     // ---------- MOCK POSTS ----------
     private val posts = arrayListOf(
-        Post(1, 1, "TITLE1","Ремонт пральної машини", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), tags = listOf("ремонт", "техніка")),
-        Post(3,  2, "TITLE2", "Потрібен електрик", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), tags = listOf("електрика")),
+        Post(1, 1, "TITLE1","Ремонт пральної машини", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis()  ,photoLinks = listOf("test"), tags = listOf("ремонт", "техніка")),
+        Post(2,  2, "TITLE2", "Потрібен електрик", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), tags = listOf("електрика")),
         Post(3, 3, "3","Заміна труб", System.currentTimeMillis(), PostStatus.BLOCKED,System.currentTimeMillis(), tags = listOf("сантехніка")),
         Post(4, 4,"4", "Дизайн квартири", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), tags = listOf("дизайн")),
-        Post(5, 5, "TITLE5","Ремонт даху", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), tags = listOf("будівництво","ZHYD","KO MA","SLOW")),
-        Post(6, 6,"TITLE6", "Ремонт авто", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), tags = listOf("авто"))
+        Post(5, 5, "TITLE5","Ремонт даху", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), photoLinks = listOf("@drawable/test"), tags = listOf("будівництво","ZHYD","KO MA","SLOW")),
+        Post(6, 6,"TITLE6", "Ремонт авто", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), photoLinks = listOf("https://picsum.photos/200"), tags = listOf("авто"))
     )
 
     // ---------- GET LISTS ----------

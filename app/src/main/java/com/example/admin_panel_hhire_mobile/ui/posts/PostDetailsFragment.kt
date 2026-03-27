@@ -1,5 +1,7 @@
 package com.example.admin_panel_hhire_mobile.ui.posts
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import com.example.admin_panel_hhire_mobile.R
 import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
 import com.example.admin_panel_hhire_mobile.databinding.FragmentPostDetailsBinding
+import com.google.android.material.chip.Chip
 
 class PostDetailsFragment : Fragment() {
     private var _binding: FragmentPostDetailsBinding? = null
@@ -32,6 +35,7 @@ class PostDetailsFragment : Fragment() {
         val postId = arguments?.getInt("postId") ?: return
         val post = PostRepository.getPostById(postId) ?: return
         val user = PostRepository.getUserById(post.authorId)
+        val imageName = post?.photoLinks?.firstOrNull()
         binding.tvTitle.text = post.title
         binding.tvContent.text = post.content
         binding.tvStatus.text = post.status.name
@@ -39,7 +43,26 @@ class PostDetailsFragment : Fragment() {
         binding.tvEdited.text = "Edited: ${post.editDate}"
         binding.tvAuthorName.text = user?.name ?: "Unknown"
         binding.tvAuthorId.text = "Author ID: ${post.authorId}"
+        binding.chipGroupTags.removeAllViews()
 
+        post.tags.forEach { tag ->
+            val chip = Chip(requireContext()).apply {
+                text = tag
+                isClickable = false
+                isCheckable = false
+            }
+            binding.chipGroupTags.addView(chip)
+        }
+        if (imageName != null) {
+            val resId = requireContext().resources.getIdentifier(
+                imageName,
+                "drawable",
+                requireContext().packageName
+            )
+            binding.imgPost.setImageResource(resId)
+        } else {
+            binding.imgPost.setImageResource(R.drawable.ic_image_placeholder)
+        }
 
     }
     override fun onDestroyView() {
