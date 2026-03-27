@@ -1,126 +1,133 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.posts.post_details">
+    android:padding="16dp">
 
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvCreated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Created"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvEdited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edited"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ACTIVE"
+        android:padding="6dp"
+        android:textColor="@color/green"
+        android:background="@drawable/bg_status"
+        app:layout_constraintTop_toBottomOf="@id/tvCreated"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvCreated"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvStatus"/>
+
+    <TextView
+        android:id="@+id/tvAuthorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="13sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvAuthorId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: 123"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="13sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imgPost"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAuthorName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="1:1"/>
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Content..."
+        android:textSize="15sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/imgPost"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupTags"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:singleLine="false"
+        app:chipSpacing="6dp"
+        app:layout_constraintTop_toBottomOf="@id/tvContent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/layoutActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/chipGroupTags"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnBlock"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-            <TextView
-                android:id="@+id/tvCreated"
-                android:layout_marginTop="8dp"
-                android:text="Created: ..."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            android:backgroundTint="@color/gray"
+            android:textColor="@color/black"
+            android:text="Block"
+            android:textSize="20sp"/>
 
-            <TextView
-                android:id="@+id/tvEdited"
-                android:text="Edited: ..."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvTitle"
-                android:text="Title"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+        <ImageButton
+            android:id="@+id/btnMark"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/bookmark"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvStatus"
-                android:text="ACTIVE"
-                android:textColor="@color/green"
-                android:layout_marginTop="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                android:id="@+id/layoutAuthor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/bg_inner_card">
-
-                <TextView
-                    android:id="@+id/tvAuthorName"
-                    android:text="Author Name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:id="@+id/tvAuthorId"
-                    android:text="ID: 123"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/imgPost"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_image_placeholder"
-                android:scaleType="centerCrop"
-
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <TextView
-                android:id="@+id/tvContent"
-                android:text="Full content..."
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroupTags"
-                android:layout_marginTop="8dp"
-                app:singleLine="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-
-            <LinearLayout
-                android:id="@+id/layoutActions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-
-                app:layout_constraintTop_toBottomOf="@id/innerCard"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <Button
-                    android:id="@+id/btnBlock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/gray"
-                    android:textColor="@color/black"
-                    android:text="Block"
-                    android:textSize="20sp"/>
-
-                <ImageButton
-                    android:id="@+id/btnMark"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
-                    android:src="@drawable/bookmark"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Mark"/>
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

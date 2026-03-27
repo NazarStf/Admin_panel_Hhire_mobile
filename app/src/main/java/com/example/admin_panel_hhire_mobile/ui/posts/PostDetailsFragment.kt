@@ -2,6 +2,7 @@ package com.example.admin_panel_hhire_mobile.ui.posts
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import com.example.admin_panel_hhire_mobile.data.model.PostStatus
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -38,12 +39,12 @@ class PostDetailsFragment : Fragment() {
         val imageName = post?.photoLinks?.firstOrNull()
         binding.tvTitle.text = post.title
         binding.tvContent.text = post.content
-        binding.tvStatus.text = post.status.name
         binding.tvCreated.text = "Created: ${post.createdDate}"
         binding.tvEdited.text = "Edited: ${post.editDate}"
         binding.tvAuthorName.text = user?.name ?: "Unknown"
         binding.tvAuthorId.text = "Author ID: ${post.authorId}"
         binding.chipGroupTags.removeAllViews()
+        setStatusBackground(post.status)
 
         post.tags.forEach { tag ->
             val chip = Chip(requireContext()).apply {
@@ -71,6 +72,25 @@ class PostDetailsFragment : Fragment() {
             }
         }
 
+    }
+    private fun setStatusBackground(status: PostStatus) {
+        val bgDrawable = android.graphics.drawable.GradientDrawable().apply {
+            cornerRadius = 12f
+            setStroke(2, when(status) {
+                PostStatus.ACTIVE -> Color.GREEN
+                PostStatus.BLOCKED -> Color.RED
+                PostStatus.MARKED -> Color.YELLOW
+                PostStatus.FROZEN -> Color.LTGRAY
+            })
+            setColor(when(status) {
+                PostStatus.ACTIVE -> Color.WHITE
+                PostStatus.BLOCKED -> Color.RED
+                PostStatus.MARKED -> Color.YELLOW
+                PostStatus.FROZEN -> Color.LTGRAY
+            })
+        }
+        binding.tvStatus.background = bgDrawable
+        binding.tvStatus.text = status.name
     }
     override fun onDestroyView() {
         super.onDestroyView()
