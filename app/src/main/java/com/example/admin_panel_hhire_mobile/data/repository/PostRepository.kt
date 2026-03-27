@@ -1,31 +1,86 @@
 package com.example.admin_panel_hhire_mobile.data.repository
 
 import com.example.admin_panel_hhire_mobile.data.model.Post
-import com.example.admin_panel_hhire_mobile.data.model.User
 import com.example.admin_panel_hhire_mobile.data.model.PostStatus
+import com.example.admin_panel_hhire_mobile.data.model.User
 import com.example.admin_panel_hhire_mobile.data.model.UserStatus
-
 
 object PostRepository {
 
     // ---------- MOCK USERS ----------
     private val users = arrayListOf(
-        User(1, "Іван", "ivan@gmail.com", UserStatus.ACTIVE, "avatar1.png", "Майстер"),
-        User(2, "Петро", "petro@gmail.com", UserStatus.ACTIVE, "avatar2.png", "Електрик"),
-        User(3, "Олег", "oleg@gmail.com", UserStatus.BLOCKED, "avatar3.png", "Сантехнік"),
-        User(4, "Марія", "maria@gmail.com", UserStatus.FROZEN, "avatar4.png", "Дизайнер"),
-        User(5, "Анна", "anna@gmail.com", UserStatus.ACTIVE, "avatar5.png", "Будівельник"),
-        User(6, "Юрій", "yurii@gmail.com", UserStatus.ACTIVE, "avatar6.png", "Механік")
+        User(1, "Іван", "ivan@gmail.com", UserStatus.ACTIVE, "avatar1.png", "Люблю подорожі ✈️"),
+        User(2, "Петро", "petro@gmail.com", UserStatus.ACTIVE, "avatar2.png", "Коджу і п’ю каву ☕"),
+        User(3, "Олег", "oleg@gmail.com", UserStatus.BLOCKED, "avatar3.png", "Фотограф 📸"),
+        User(4, "Марія", "maria@gmail.com", UserStatus.FROZEN, "avatar4.png", "UI/UX дизайнер 🎨"),
+        User(5, "Анна", "anna@gmail.com", UserStatus.ACTIVE, "avatar5.png", "Фітнес і стиль 💪"),
+        User(6, "Юрій", "yurii@gmail.com", UserStatus.ACTIVE, "avatar6.png", "Авто і швидкість 🚗")
     )
 
     // ---------- MOCK POSTS ----------
     private val posts = arrayListOf(
-        Post(1, 1, "TITLE1","Ремонт пральної машини", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis()  ,photoLinks = listOf("test"), tags = listOf("ремонт", "техніка")),
-        Post(2,  2, "TITLE2", "Потрібен електрик", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), tags = listOf("електрика")),
-        Post(3, 3, "3","Заміна труб", System.currentTimeMillis(), PostStatus.BLOCKED,System.currentTimeMillis(), tags = listOf("сантехніка")),
-        Post(4, 4,"4", "Дизайн квартири", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), tags = listOf("дизайн")),
-        Post(5, 5, "TITLE5","Ремонт даху", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), photoLinks = listOf("@drawable/test"), tags = listOf("будівництво","ZHYD","KO MA","SLOW")),
-        Post(6, 6,"TITLE6", "Ремонт авто", System.currentTimeMillis(), PostStatus.ACTIVE,System.currentTimeMillis(), photoLinks = listOf("https://picsum.photos/200"), tags = listOf("авто"))
+
+        Post(
+            1, 1,
+            "Ранок ☀️",
+            "Сьогодні прокинувся дуже рано і пішов гуляти містом. Атмосфера топ!",
+            System.currentTimeMillis(),
+            PostStatus.ACTIVE,
+            System.currentTimeMillis(),
+            photoLinks = listOf("test"),
+            tags = listOf("ранок", "життя", "місто")
+        ),
+
+        Post(
+            2, 2,
+            "Код і кава",
+            "Без кави сьогодні взагалі нічого не працює 😅",
+            System.currentTimeMillis(),
+            PostStatus.ACTIVE,
+            System.currentTimeMillis(),
+            tags = listOf("код", "кава", "жиза")
+        ),
+
+        Post(
+            3, 3,
+            "Новий кадр",
+            "Зловив класний момент на заході сонця 🌇",
+            System.currentTimeMillis(),
+            PostStatus.BLOCKED,
+            System.currentTimeMillis(),
+            tags = listOf("фото", "sunset")
+        ),
+
+        Post(
+            4, 4,
+            "UI натхнення",
+            "Знайшла крутий дизайн для мобільного додатку 😍",
+            System.currentTimeMillis(),
+            PostStatus.ACTIVE,
+            System.currentTimeMillis(),
+            tags = listOf("design", "ui", "inspiration")
+        ),
+
+        Post(
+            5, 5,
+            "Тренування",
+            "Сьогодні був жорсткий тренінг, але результат того вартий 💪",
+            System.currentTimeMillis(),
+            PostStatus.ACTIVE,
+            System.currentTimeMillis(),
+            photoLinks = listOf("@drawable/test"),
+            tags = listOf("спорт", "fitness", "мотивація", "жесть")
+        ),
+
+        Post(
+            6, 6,
+            "Нічна поїздка",
+            "Їхати нічним містом — окремий вайб 🌃",
+            System.currentTimeMillis(),
+            PostStatus.ACTIVE,
+            System.currentTimeMillis(),
+            tags = listOf("ніч", "місто", "drive")
+        )
     )
 
     // ---------- GET LISTS ----------
