@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.admin_panel_hhire_mobile.R
 import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
-import com.example.admin_panel_hhire_mobile.databinding.FragmentUsersBinding
+import com.example.admin_panel_hhire_mobile.ui.posts.PostAdapter
+import com.example.admin_panel_hhire_mobile.ui.posts.PostDetailsFragment
+import androidx.fragment.app.Fragment
+import com.example.admin_panel_hhire_mobile.databinding.FragmentUserDetailsBinding
 
-class UsersFragment : Fragment() {
-    private var _binding: FragmentUsersBinding? = null
+class UserDetailsFragment : Fragment() {
+    private var _binding: FragmentUserDetailsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,20 +21,25 @@ class UsersFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUsersBinding.inflate(inflater, container, false)
+        _binding = FragmentUserDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
 
-        val users = PostRepository.getAllUsers()
+        val userId = arguments?.getInt("userId") ?: return
+        val user = PostRepository.getUserById(userId) ?: return
 
-        val adapter = UserAdapter(users) { user ->
-            val fragment = UserDetailsFragment()
+        binding.tvName.text = user.name
+        binding.tvEmail.text = user.email
+
+        val posts = PostRepository.getAllPosts().filter { it.authorId == userId }
+
+        val adapter = PostAdapter(posts) { post ->
+            val fragment = PostDetailsFragment()
             fragment.arguments = Bundle().apply {
-                putInt("userId", user.id)
+                putInt("postId", post.id)
             }
 
             parentFragmentManager.beginTransaction()
@@ -41,8 +48,8 @@ class UsersFragment : Fragment() {
                 .commit()
         }
 
-        binding.recyclerViewUsers.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewUsers.adapter = adapter
+        binding.recyclerViewPosts.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewPosts.adapter = adapter
     }
     override fun onDestroyView() {
         super.onDestroyView()
