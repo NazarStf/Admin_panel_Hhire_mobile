@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.admin_panel_hhire_mobile.databinding.ItemUserBinding
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
+import com.example.admin_panel_hhire_mobile.ui.users.updateMarked
 class UserAdapter(
     private val users: List<User>,
     private val onClick: (User) -> Unit
@@ -27,8 +29,14 @@ class UserAdapter(
 
         holder.binding.tvName.text = user.name
         holder.binding.tvStatus.text = user.status.name
-
+        updateMarked(user, holder.binding.btnMark)
         holder.itemView.setOnClickListener { onClick(user) }
+
+        holder.binding.btnMark.setOnClickListener {
+            val currentUser = PostRepository.getUserById(user.id) ?: return@setOnClickListener
+            currentUser.isMarked = !(currentUser.isMarked)
+            updateMarked(currentUser, holder.binding.btnMark)
+        }
     }
 
     override fun getItemCount() = users.size

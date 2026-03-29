@@ -6,5 +6,6 @@ data class User(
     var email: String,
     var status: UserStatus,
     val avatar: String,
-    var description: String
+    var description: String,
+    var isMarked: Boolean = false
 )

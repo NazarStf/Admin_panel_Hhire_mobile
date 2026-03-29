@@ -29,6 +29,7 @@ class PostAdapter(
         holder.binding.tvPostStatus.text = post.status.name
         holder.binding.tvPostDescription.text = post.content
         holder.binding.chipGroupTags.removeAllViews()
+        updateMarked(post, holder.binding.btnMark)
         updateStatus(post, holder.binding.tvPostStatus, holder.binding.btnBlock, holder.itemView.context)
         post.tags.forEach { tag ->
             val chip = Chip(holder.itemView.context).apply {
