@@ -12,6 +12,7 @@ import com.example.admin_panel_hhire_mobile.R
 import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
 import com.example.admin_panel_hhire_mobile.databinding.FragmentPostDetailsBinding
 import com.google.android.material.chip.Chip
+import com.example.admin_panel_hhire_mobile.data.model.Post
 
 class PostDetailsFragment : Fragment() {
     private var _binding: FragmentPostDetailsBinding? = null
@@ -75,6 +76,17 @@ class PostDetailsFragment : Fragment() {
                 binding.imgPost.visibility = View.VISIBLE
             }
         }
+        binding.btnBlock.setOnClickListener {
+            val currentPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
+
+            if (currentPost.status == PostStatus.BLOCKED) {
+                PostRepository.unblockPost(post.id)
+            } else {
+                PostRepository.blockPost(post.id)
+            }
+            val updatedPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
+            updateStatus(updatedPost)
+        }
 
     }
     private fun setStatusBackground(status: PostStatus) {
@@ -91,6 +103,16 @@ class PostDetailsFragment : Fragment() {
         }
         binding.tvStatus.background = bgDrawable
         binding.tvStatus.text = status.name
+    }
+    private fun updateStatus(post: Post) {
+        binding.tvStatus.text = post.status.name
+
+        if (post.status == PostStatus.BLOCKED) {
+            binding.btnBlock.text = "Unblock"
+        } else {
+            binding.btnBlock.text = "Block"
+        }
+        setStatusBackground(post.status)
     }
     override fun onDestroyView() {
         super.onDestroyView()
