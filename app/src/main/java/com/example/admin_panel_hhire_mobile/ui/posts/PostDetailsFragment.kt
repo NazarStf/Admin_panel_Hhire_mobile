@@ -46,7 +46,7 @@ class PostDetailsFragment : Fragment() {
         binding.tvAuthorName.text = user?.name ?: "Unknown"
         binding.tvAuthorId.text = "Author ID: ${post.authorId}"
         binding.chipGroupTags.removeAllViews()
-        setStatusBackground(post.status)
+        updateStatus(post, binding.tvStatus, binding.btnBlock, requireContext())
         updateMarked(post, binding.btnMark)
 
         post.tags.forEach { tag ->
@@ -86,8 +86,7 @@ class PostDetailsFragment : Fragment() {
             } else {
                 PostRepository.blockPost(post.id)
             }
-            val updatedPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
-            updateStatus(updatedPost)
+            updateStatus(post, binding.tvStatus, binding.btnBlock, requireContext())
         }
         binding.btnMark.setOnClickListener {
             val currentPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
@@ -95,29 +94,6 @@ class PostDetailsFragment : Fragment() {
             updateMarked(post, binding.btnMark)
         }
 
-    }
-    private fun setStatusBackground(status: PostStatus) {
-        val green = requireContext().getColor(R.color.green)
-        val red = requireContext().getColor(R.color.red)
-        val bgDrawable = android.graphics.drawable.GradientDrawable().apply {
-            cornerRadius = 360f
-            setColor(when(status) {
-                PostStatus.ACTIVE -> green
-                PostStatus.BLOCKED -> red
-            })
-        }
-        binding.tvStatus.background = bgDrawable
-        binding.tvStatus.text = status.name
-    }
-    private fun updateStatus(post: Post) {
-        binding.tvStatus.text = post.status.name
-
-        if (post.status == PostStatus.BLOCKED) {
-            binding.btnBlock.text = "Unblock"
-        } else {
-            binding.btnBlock.text = "Block"
-        }
-        setStatusBackground(post.status)
     }
     override fun onDestroyView() {
         super.onDestroyView()
