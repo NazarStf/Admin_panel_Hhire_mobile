@@ -9,5 +9,6 @@ data class Post(
     var status: PostStatus,
     var editDate: Long? = null,
     var photoLinks: List<String> = emptyList(),
-    var tags: List<String> = emptyList()
+    var tags: List<String> = emptyList(),
+    var isMarked: Boolean = false
 )

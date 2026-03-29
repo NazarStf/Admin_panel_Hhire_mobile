@@ -46,6 +46,7 @@ class PostDetailsFragment : Fragment() {
         binding.tvAuthorId.text = "Author ID: ${post.authorId}"
         binding.chipGroupTags.removeAllViews()
         setStatusBackground(post.status)
+        updateMarked(post)
 
         post.tags.forEach { tag ->
             val chip = Chip(requireContext()).apply {
@@ -87,18 +88,22 @@ class PostDetailsFragment : Fragment() {
             val updatedPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
             updateStatus(updatedPost)
         }
+        binding.btnMark.setOnClickListener {
+            val currentPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
+            currentPost.isMarked = !(currentPost.isMarked)
+            val updatedPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
+            updateMarked(updatedPost)
+        }
 
     }
     private fun setStatusBackground(status: PostStatus) {
         val green = requireContext().getColor(R.color.green)
         val red = requireContext().getColor(R.color.red)
-        val yellow = requireContext().getColor(R.color.yellow)
         val bgDrawable = android.graphics.drawable.GradientDrawable().apply {
             cornerRadius = 360f
             setColor(when(status) {
                 PostStatus.ACTIVE -> green
                 PostStatus.BLOCKED -> red
-                PostStatus.MARKED -> yellow
             })
         }
         binding.tvStatus.background = bgDrawable
@@ -113,6 +118,13 @@ class PostDetailsFragment : Fragment() {
             binding.btnBlock.text = "Block"
         }
         setStatusBackground(post.status)
+    }
+    private fun updateMarked(post: Post) {
+        if (post.isMarked == true) {
+            binding.btnMark.setImageResource(R.drawable.ic_image_placeholder)
+        } else {
+            binding.btnMark.setImageResource(R.drawable.bookmark)
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

@@ -28,7 +28,8 @@ object PostRepository {
             PostStatus.ACTIVE,
             System.currentTimeMillis(),
             photoLinks = listOf("test"),
-            tags = listOf("ранок", "життя", "місто")
+            tags = listOf("ранок", "життя", "місто"),
+            isMarked = true
         ),
 
         Post(
