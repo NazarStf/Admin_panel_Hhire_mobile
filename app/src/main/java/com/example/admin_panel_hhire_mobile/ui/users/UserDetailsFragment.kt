@@ -35,7 +35,7 @@ class UserDetailsFragment : Fragment() {
         binding.tvName.text = user.name
         binding.tvEmail.text = user.email
         updateMarked(user, binding.btnMark)
-        updateStatus(user, binding.tvStatus,binding.btnBlock ,requireContext())
+        updateStatus(user, binding.tvStatus,binding.btnBlock ,binding.btnFreeze,requireContext())
         binding.btnMark.setOnClickListener {
             val currentUser = PostRepository.getUserById(user.id) ?: return@setOnClickListener
             currentUser.isMarked = !(currentUser.isMarked)
@@ -49,7 +49,17 @@ class UserDetailsFragment : Fragment() {
             } else {
                 PostRepository.changeUserStatus(user.id, UserStatus.BLOCKED)
             }
-            updateStatus(user, binding.tvStatus, binding.btnBlock, requireContext())
+            updateStatus(user, binding.tvStatus, binding.btnBlock,binding.btnFreeze, requireContext())
+        }
+        binding.btnFreeze.setOnClickListener {
+            val currentUser = PostRepository.getUserById(user.id) ?: return@setOnClickListener
+
+            if (currentUser.status == UserStatus.FROZEN) {
+                PostRepository.changeUserStatus(user.id,UserStatus.ACTIVE)
+            } else {
+                PostRepository.changeUserStatus(user.id, UserStatus.FROZEN)
+            }
+            updateStatus(user, binding.tvStatus, binding.btnBlock,binding.btnFreeze, requireContext())
         }
 
         val posts = PostRepository.getAllPosts().filter { it.authorId == userId }
