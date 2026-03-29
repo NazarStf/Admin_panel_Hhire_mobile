@@ -30,6 +30,7 @@ class UserAdapter(
         holder.binding.tvName.text = user.name
         holder.binding.tvStatus.text = user.status.name
         updateMarked(user, holder.binding.btnMark)
+        updateStatus(user, holder.binding.tvStatus,null ,holder.itemView.context)
         holder.itemView.setOnClickListener { onClick(user) }
 
         holder.binding.btnMark.setOnClickListener {

@@ -11,9 +11,9 @@ import com.example.admin_panel_hhire_mobile.data.model.UserStatus
 fun updateMarked(user: User, markButton: ImageView) {
     markButton.setImageResource(if (user.isMarked) R.drawable.bookmark else R.drawable.logo)
 }
-fun updateStatus(user: User, statusTextView: TextView, blockButton: Button, context: Context) {
+fun updateStatus(user: User, statusTextView: TextView, blockButton: Button?, context: Context) {
     statusTextView.text = user.status.name
-    blockButton.text = if (user.status == UserStatus.BLOCKED) "Unblock" else "Block"
+    blockButton?.text = if (user.status == UserStatus.BLOCKED) "Unblock" else "Block"
     setStatusBackground(user.status, statusTextView, context)
 }
 fun setStatusBackground(status: UserStatus, statusTextView: TextView, context: Context) {
