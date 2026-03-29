@@ -13,6 +13,7 @@ import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
 import com.example.admin_panel_hhire_mobile.databinding.FragmentPostDetailsBinding
 import com.google.android.material.chip.Chip
 import com.example.admin_panel_hhire_mobile.data.model.Post
+import com.example.admin_panel_hhire_mobile.ui.posts.updateMarked
 
 class PostDetailsFragment : Fragment() {
     private var _binding: FragmentPostDetailsBinding? = null
@@ -37,7 +38,7 @@ class PostDetailsFragment : Fragment() {
         val postId = arguments?.getInt("postId") ?: return
         val post = PostRepository.getPostById(postId) ?: return
         val user = PostRepository.getUserById(post.authorId)
-        val imageName = post?.photoLinks?.firstOrNull()
+        val imageName = post.photoLinks.firstOrNull()
         binding.tvTitle.text = post.title
         binding.tvContent.text = post.content
         binding.tvCreated.text = "Created: ${post.createdDate}"
@@ -46,7 +47,7 @@ class PostDetailsFragment : Fragment() {
         binding.tvAuthorId.text = "Author ID: ${post.authorId}"
         binding.chipGroupTags.removeAllViews()
         setStatusBackground(post.status)
-        updateMarked(post)
+        updateMarked(post, binding.btnMark)
 
         post.tags.forEach { tag ->
             val chip = Chip(requireContext()).apply {
@@ -91,8 +92,7 @@ class PostDetailsFragment : Fragment() {
         binding.btnMark.setOnClickListener {
             val currentPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
             currentPost.isMarked = !(currentPost.isMarked)
-            val updatedPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
-            updateMarked(updatedPost)
+            updateMarked(post, binding.btnMark)
         }
 
     }
@@ -118,13 +118,6 @@ class PostDetailsFragment : Fragment() {
             binding.btnBlock.text = "Block"
         }
         setStatusBackground(post.status)
-    }
-    private fun updateMarked(post: Post) {
-        if (post.isMarked == true) {
-            binding.btnMark.setImageResource(R.drawable.ic_image_placeholder)
-        } else {
-            binding.btnMark.setImageResource(R.drawable.bookmark)
-        }
     }
     override fun onDestroyView() {
         super.onDestroyView()
