@@ -33,8 +33,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ACTIVE"
-            android:textColor="@color/green"
+            android:textColor="@color/white"
             android:textSize="14sp"
+            android:background="@drawable/bg_status"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvPostTitle"/>
 

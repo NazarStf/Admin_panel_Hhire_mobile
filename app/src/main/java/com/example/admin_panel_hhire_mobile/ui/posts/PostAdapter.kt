@@ -29,10 +29,6 @@ class PostAdapter(
         holder.binding.tvPostTitle.text = post.title
         holder.binding.tvPostStatus.text = post.status.name
         holder.binding.tvPostDescription.text = post.content
-        holder.binding.tvPostStatus.setTextColor(
-            if (post.status == PostStatus.ACTIVE) Color.parseColor("#388E3C")
-            else Color.parseColor("#D32F2F")
-        )
         holder.binding.chipGroupTags.removeAllViews()
         post.tags.forEach { tag ->
             val chip = Chip(holder.itemView.context).apply {
@@ -49,6 +45,13 @@ class PostAdapter(
         holder.itemView.setOnClickListener { onClick(post) }
 
         holder.binding.btnBlock.setOnClickListener {
+            val currentPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
+            if (currentPost.status == PostStatus.BLOCKED) {
+                PostRepository.unblockPost(post.id)
+            } else {
+                PostRepository.blockPost(post.id)
+            }
+            updateStatus(post, holder.binding.tvPostStatus, holder.binding.btnBlock, holder.itemView.context)
         }
 
         holder.binding.btnMark.setOnClickListener {
