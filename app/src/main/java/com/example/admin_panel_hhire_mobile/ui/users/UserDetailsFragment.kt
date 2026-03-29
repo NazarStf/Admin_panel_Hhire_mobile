@@ -10,6 +10,7 @@ import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
 import com.example.admin_panel_hhire_mobile.ui.posts.PostAdapter
 import com.example.admin_panel_hhire_mobile.ui.posts.PostDetailsFragment
 import androidx.fragment.app.Fragment
+import com.example.admin_panel_hhire_mobile.data.model.UserStatus
 import com.example.admin_panel_hhire_mobile.databinding.FragmentUserDetailsBinding
 
 class UserDetailsFragment : Fragment() {
@@ -34,10 +35,21 @@ class UserDetailsFragment : Fragment() {
         binding.tvName.text = user.name
         binding.tvEmail.text = user.email
         updateMarked(user, binding.btnMark)
+        updateStatus(user, binding.tvStatus,binding.btnBlock ,requireContext())
         binding.btnMark.setOnClickListener {
             val currentUser = PostRepository.getUserById(user.id) ?: return@setOnClickListener
             currentUser.isMarked = !(currentUser.isMarked)
             updateMarked(currentUser, binding.btnMark)
+        }
+        binding.btnBlock.setOnClickListener {
+            val currentUser = PostRepository.getUserById(user.id) ?: return@setOnClickListener
+
+            if (currentUser.status == UserStatus.BLOCKED) {
+                PostRepository.changeUserStatus(user.id,UserStatus.ACTIVE)
+            } else {
+                PostRepository.changeUserStatus(user.id, UserStatus.BLOCKED)
+            }
+            updateStatus(user, binding.tvStatus, binding.btnBlock, requireContext())
         }
 
         val posts = PostRepository.getAllPosts().filter { it.authorId == userId }
