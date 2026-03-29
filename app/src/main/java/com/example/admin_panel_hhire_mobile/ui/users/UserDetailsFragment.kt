@@ -33,6 +33,12 @@ class UserDetailsFragment : Fragment() {
 
         binding.tvName.text = user.name
         binding.tvEmail.text = user.email
+        updateMarked(user, binding.btnMark)
+        binding.btnMark.setOnClickListener {
+            val currentUser = PostRepository.getUserById(user.id) ?: return@setOnClickListener
+            currentUser.isMarked = !(currentUser.isMarked)
+            updateMarked(currentUser, binding.btnMark)
+        }
 
         val posts = PostRepository.getAllPosts().filter { it.authorId == userId }
 
