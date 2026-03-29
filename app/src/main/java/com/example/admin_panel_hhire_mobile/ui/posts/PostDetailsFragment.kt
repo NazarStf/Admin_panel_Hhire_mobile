@@ -91,7 +91,7 @@ class PostDetailsFragment : Fragment() {
         binding.btnMark.setOnClickListener {
             val currentPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
             currentPost.isMarked = !(currentPost.isMarked)
-            updateMarked(post, binding.btnMark)
+            updateMarked(currentPost, binding.btnMark)
         }
 
     }

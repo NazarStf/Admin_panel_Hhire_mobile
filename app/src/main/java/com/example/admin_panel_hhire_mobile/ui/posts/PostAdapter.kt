@@ -25,11 +25,11 @@ class PostAdapter(
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
-        updateMarked(post, holder.binding.btnMark)
         holder.binding.tvPostTitle.text = post.title
         holder.binding.tvPostStatus.text = post.status.name
         holder.binding.tvPostDescription.text = post.content
         holder.binding.chipGroupTags.removeAllViews()
+        updateStatus(post, holder.binding.tvPostStatus, holder.binding.btnBlock, holder.itemView.context)
         post.tags.forEach { tag ->
             val chip = Chip(holder.itemView.context).apply {
                 text = tag
@@ -51,13 +51,13 @@ class PostAdapter(
             } else {
                 PostRepository.blockPost(post.id)
             }
-            updateStatus(post, holder.binding.tvPostStatus, holder.binding.btnBlock, holder.itemView.context)
+            updateStatus(currentPost, holder.binding.tvPostStatus, holder.binding.btnBlock, holder.itemView.context)
         }
 
         holder.binding.btnMark.setOnClickListener {
             val currentPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
             currentPost.isMarked = !(currentPost.isMarked)
-            updateMarked(post, holder.binding.btnMark)
+            updateMarked(currentPost, holder.binding.btnMark)
         }
     }
 
