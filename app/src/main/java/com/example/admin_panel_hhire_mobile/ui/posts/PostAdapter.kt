@@ -12,7 +12,7 @@ import android.content.res.ColorStateList
 import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
 
 class PostAdapter(
-    private val posts: List<Post>,
+    private var posts: List<Post>,
     private val onClick: (Post) -> Unit
 ) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
@@ -60,6 +60,10 @@ class PostAdapter(
             currentPost.isMarked = !(currentPost.isMarked)
             updateMarked(currentPost, holder.binding.btnMark)
         }
+    }
+    fun updateList(newList: List<Post>) {
+        posts = newList
+        notifyItemRangeChanged(0, posts.size)
     }
 
     override fun getItemCount(): Int = posts.size
