@@ -7,8 +7,7 @@
         android:id="@+id/etSearch"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_weight="1"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="8dp"
         android:hint="Search"
         android:background="@drawable/search_background"
@@ -22,6 +21,18 @@
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/filterIcon"/>
+
+    <ImageView
+        android:id="@+id/filterIcon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/logo"
+        android:padding="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="@id/etSearch"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -29,7 +40,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/etSearch"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
