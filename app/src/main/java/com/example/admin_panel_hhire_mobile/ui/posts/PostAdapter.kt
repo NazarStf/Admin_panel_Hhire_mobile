@@ -52,18 +52,18 @@ class PostAdapter(
             } else {
                 PostRepository.blockPost(post.id)
             }
-            updateStatus(currentPost, holder.binding.tvPostStatus, holder.binding.btnBlock, holder.itemView.context)
+            notifyItemChanged(position)
         }
 
         holder.binding.btnMark.setOnClickListener {
             val currentPost = PostRepository.getPostById(post.id) ?: return@setOnClickListener
             currentPost.isMarked = !(currentPost.isMarked)
-            updateMarked(currentPost, holder.binding.btnMark)
+            notifyItemChanged(position)
         }
     }
     fun updateList(newList: List<Post>) {
         posts = newList
-        notifyItemRangeChanged(0, posts.size)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = posts.size

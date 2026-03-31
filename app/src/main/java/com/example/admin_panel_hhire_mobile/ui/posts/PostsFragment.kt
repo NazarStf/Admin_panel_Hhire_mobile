@@ -32,7 +32,6 @@ class PostsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val posts: List<Post> = PostRepository.getAllPosts()
         allPosts = PostRepository.getAllPosts()
         filteredPosts = allPosts
         binding.etSearch.addTextChangedListener {
@@ -40,7 +39,7 @@ class PostsFragment : Fragment() {
             filterPosts(query, currentStatus)
         }
 
-        val adapter = PostAdapter(filteredPosts) { post ->
+        adapter = PostAdapter(filteredPosts) { post ->
             val fragment = PostDetailsFragment()
 
             val bundle = Bundle()
