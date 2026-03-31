@@ -40,7 +40,7 @@ class SettingsFragment : Fragment() {
         }
     }
     private fun exportDataToJson() {
-        val users = PostRepository.getAllUsers() // або будь-які дані
+        val users = PostRepository.getAllUsers()
         val posts = PostRepository.getAllPosts()
 
         val exportMap = mapOf("users" to users, "posts" to posts)
@@ -50,25 +50,25 @@ class SettingsFragment : Fragment() {
         val file = File(requireContext().getExternalFilesDir(null), fileName)
         file.writeText(jsonString)
 
-        Toast.makeText(requireContext(), "Дані збережено у ${file.absolutePath}", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "Data saved at ${file.absolutePath}", Toast.LENGTH_LONG).show()
     }
     private fun showClearDataDialog() {
         AlertDialog.Builder(requireContext())
-            .setTitle("Підтвердьте дію")
-            .setMessage("Ви впевнені, що хочете видалити всіх користувачів?")
-            .setPositiveButton("Так") { _, _ ->
-                PostRepository.getAllUsers()
-                Toast.makeText(requireContext(), "Усі користувачі видалені", Toast.LENGTH_SHORT).show()
+            .setTitle("Confirm window")
+            .setMessage("Delete all data from admin panel?")
+            .setPositiveButton("Delete") { _, _ ->
+                PostRepository.clearAllData()
+                Toast.makeText(requireContext(), "Data Cleared", Toast.LENGTH_SHORT).show()
             }
-            .setNegativeButton("Ні", null)
+            .setNegativeButton("Cancel", null)
             .show()
     }
     private fun showAboutDialog() {
         val versionName = try {
             val pInfo = requireContext().packageManager.getPackageInfo(requireContext().packageName, 0)
-            pInfo.versionName ?: "1.0"
+            pInfo.versionName ?: "67.0"
         } catch (e: Exception) {
-            "1.0"
+            "67.0"
         }
         AlertDialog.Builder(requireContext())
             .setTitle("About app")

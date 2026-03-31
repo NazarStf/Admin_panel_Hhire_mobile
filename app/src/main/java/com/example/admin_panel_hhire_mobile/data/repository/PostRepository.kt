@@ -4,6 +4,7 @@ import com.example.admin_panel_hhire_mobile.data.model.Post
 import com.example.admin_panel_hhire_mobile.data.model.PostStatus
 import com.example.admin_panel_hhire_mobile.data.model.User
 import com.example.admin_panel_hhire_mobile.data.model.UserStatus
+import kotlin.collections.List
 
 object PostRepository {
 
@@ -83,6 +84,10 @@ object PostRepository {
             tags = listOf("ніч", "місто", "drive")
         )
     )
+    fun clearAllData(){
+        users.clear()
+        posts.clear()
+    }
 
     // ---------- GET LISTS ----------
     fun getAllUsers(): List<User> = users
