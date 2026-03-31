@@ -1,11 +1,35 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settingsContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <TextView
+    <Button
+        android:id="@+id/btnExportData"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Settings"
-        android:gravity="center"
-        android:textSize="20sp"/>
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:text="Data Export" />
+
+    <Button
+        android:id="@+id/btnClearData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clear Data"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnResetData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset Data"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="About App"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>
