@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.admin_panel_hhire_mobile.R
 import com.example.admin_panel_hhire_mobile.data.model.Post
+import com.example.admin_panel_hhire_mobile.data.model.PostFilter
 import com.example.admin_panel_hhire_mobile.data.model.PostStatus
 import com.example.admin_panel_hhire_mobile.data.model.User
+import com.example.admin_panel_hhire_mobile.data.model.UserFilter
 import com.example.admin_panel_hhire_mobile.data.model.UserStatus
 import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
 import com.example.admin_panel_hhire_mobile.databinding.FragmentUsersBinding
@@ -23,7 +26,7 @@ class UsersFragment : Fragment() {
     private lateinit var adapter: UserAdapter
     private var allUsers = listOf<User>()
     private var filteredUsers = listOf<User>()
-    private var currentStatus = "ALL"
+    private var currentFilter = UserFilter.ALL
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +44,7 @@ class UsersFragment : Fragment() {
         filteredUsers = allUsers
         binding.etSearch.addTextChangedListener {
             val query = it.toString()
-            filterUsers(query, currentStatus)
+            filterUsers(query, currentFilter)
         }
 
         adapter = UserAdapter(filteredUsers) { user ->
@@ -55,28 +58,48 @@ class UsersFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+        binding.filterIcon.setOnClickListener { view ->
+            val popup = PopupMenu(requireContext(), view)
+            popup.inflate(R.menu.filter_menu_users)
+
+            popup.setOnMenuItemClickListener { item ->
+                currentFilter =  when (item.itemId) {
+                    R.id.all -> UserFilter.ALL
+                    R.id.marked -> UserFilter.MARKED
+                    R.id.blocked -> UserFilter.BLOCKED
+                    R.id.active -> UserFilter.ACTIVE
+                    R.id.frozen -> UserFilter.FROZEN
+                    else -> UserFilter.ALL
+                }
+                filterUsers(binding.etSearch.text.toString(), currentFilter)
+                true
+            }
+
+            popup.show()
+        }
 
         binding.recyclerViewUsers.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewUsers.adapter = adapter
     }
 
-    private fun filterUsers(query: String, status: String) {
-
+    private fun filterUsers(query: String, status: UserFilter) {
+        allUsers = PostRepository.getAllUsers()
         filteredUsers = allUsers.filter { user ->
 
             val matchesQuery =
-                user.email.contains(query, true) ||
-                        (user.name.contains(query, true) == true)
-            val matchesStatus = when (status) {
-                "ALL" -> true
-                "ACTIVE" -> user.status == UserStatus.ACTIVE
-                "BLOCKED" -> user.status == UserStatus.BLOCKED
-                "FROZEN" -> user.status == UserStatus.BLOCKED
-                "MARKED" -> user.isMarked
+                user.description.contains(query, true) ||
+                        user.email.contains(query, true)
+
+            val matchesFilter = when (status) {
+                UserFilter.ALL -> true
+                UserFilter.ACTIVE -> user.status == UserStatus.ACTIVE
+                UserFilter.BLOCKED -> user.status == UserStatus.BLOCKED
+                UserFilter.FROZEN -> user.status == UserStatus.FROZEN
+                UserFilter.MARKED -> user.isMarked
                 else -> true
             }
 
-            matchesQuery && matchesStatus
+            matchesQuery && matchesFilter
         }
 
         adapter.updateList(filteredUsers)
