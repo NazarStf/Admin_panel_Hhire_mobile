@@ -5,6 +5,14 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <TextView
+        android:text="Settings"
+        android:layout_width="match_parent"
+        android:textSize="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content">
+    </TextView>
+
     <Button
         android:id="@+id/btnExportData"
         android:layout_width="match_parent"
