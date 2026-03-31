@@ -88,6 +88,15 @@ object PostRepository {
         users.clear()
         posts.clear()
     }
+    fun restoreUsers(original: List<User>) {
+        users.clear()
+        users.addAll(original)
+    }
+
+    fun restorePosts(original: List<Post>) {
+        posts.clear()
+        posts.addAll(original)
+    }
 
     // ---------- GET LISTS ----------
     fun getAllUsers(): List<User> = users

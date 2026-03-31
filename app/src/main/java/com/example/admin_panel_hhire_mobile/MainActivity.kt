@@ -2,9 +2,11 @@ package com.example.admin_panel_hhire_mobile
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.admin_panel_hhire_mobile.data.viewmodel.DataViewModel
 import com.example.admin_panel_hhire_mobile.ui.posts.PostsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.admin_panel_hhire_mobile.ui.users.UsersFragment
@@ -16,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        val viewModel: DataViewModel by viewModels()
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, PostsFragment())

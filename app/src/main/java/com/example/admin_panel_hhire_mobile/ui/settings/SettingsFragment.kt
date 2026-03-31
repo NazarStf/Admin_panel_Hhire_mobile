@@ -7,14 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.admin_panel_hhire_mobile.data.model.Post
+import com.example.admin_panel_hhire_mobile.data.model.User
 import com.example.admin_panel_hhire_mobile.data.repository.PostRepository
+import com.example.admin_panel_hhire_mobile.data.viewmodel.DataViewModel
 import com.example.admin_panel_hhire_mobile.databinding.FragmentSettingsBinding
 import com.google.gson.Gson
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import java.io.File
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: DataViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +43,17 @@ class SettingsFragment : Fragment() {
 
         binding.btnAbout.setOnClickListener {
             showAboutDialog()
+        }
+        binding.btnResetData.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Confirm action")
+                .setMessage("Reset every change?")
+                .setPositiveButton("Reset") { _, _ ->
+                    viewModel.resetData()
+                    Toast.makeText(requireContext(), "Data recovered", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
         }
     }
     private fun exportDataToJson() {
