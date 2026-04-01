@@ -10,7 +10,7 @@ import com.example.admin_panel_hhire_mobile.data.model.PostStatus
 
 
 fun updateMarked(post: Post, markButton: ImageView) {
-    markButton.setImageResource(if (post.isMarked) R.drawable.bookmark else R.drawable.logo)
+    markButton.setImageResource(if (post.isMarked) R.drawable.bookmark_filled else R.drawable.bookmark)
 }
 fun setStatusBackground(status: PostStatus, statusTextView: TextView, context: Context) {
     val green = context.getColor(R.color.green)

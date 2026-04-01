@@ -9,7 +9,7 @@ import com.example.admin_panel_hhire_mobile.data.model.User
 import com.example.admin_panel_hhire_mobile.data.model.UserStatus
 
 fun updateMarked(user: User, markButton: ImageView) {
-    markButton.setImageResource(if (user.isMarked) R.drawable.bookmark else R.drawable.logo)
+    markButton.setImageResource(if (user.isMarked) R.drawable.bookmark_filled else R.drawable.bookmark)
 }
 fun updateStatus(user: User, statusTextView: TextView, blockButton: Button?, freezeButton: Button?, context: Context) {
     statusTextView.text = user.status.name
