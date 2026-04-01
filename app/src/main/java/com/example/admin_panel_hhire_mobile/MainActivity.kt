@@ -25,6 +25,12 @@ class MainActivity : AppCompatActivity() {
         val settingsFragment = SettingsFragment()
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
+                .setCustomAnimations(
+                    R.anim.slide_in_right,  // enter
+                    R.anim.slide_out_left,  // exit
+                    R.anim.slide_in_left,   // popEnter (коли повертаємось)
+                    R.anim.slide_out_right  // popExit
+                )
                 .replace(R.id.fragment_container, PostsFragment())
                 .commit()
         }
